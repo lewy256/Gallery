@@ -1,0 +1,37 @@
+﻿@model Gallery.ViewModels.ImageViewModel
+
+<div class="w-25 mx-auto">
+
+    <form method="post" enctype="multipart/form-data" asp-controller="Gallery" asp-action="Upload">
+        <div class="row g-3">
+
+            <div class="col-12">
+                <label asp-for="Name" class="form-label">Name <span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control" asp-for="Name">
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Description" class="form-label">Description <span class="text-muted">(Optional)</span></label>
+                <textarea type="text" class="form-control" asp-for="Description"></textarea>
+            </div>
+
+            <div class="text-start">
+                <button onclick="addRow()" class="w-30 btn btn-outline-primary" type="button">Add tag</button>
+            </div>
+
+            <table id="AddItemsTable" class="table table-borderless">
+            </table>
+
+            <div class="col-12">
+                <label for="formFile" class="form-label">Select image</label>
+                <input class="form-control" type="file" id="formFile" name="file" required>
+                <div class="invalid-feedback">Example invalid form file feedback</div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Upload</button>
+    </form>
+</div>
+

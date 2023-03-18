@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  azurite:
+    hostname: azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    restart: always
+    ports:
+      - "10000:10000"
+
+  cosmosdb:
+    hostname: cosmosdb
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
+    tty: true
+    restart: always
+    mem_limit: 2G
+    environment:
+      - AZURE_COSMOS_EMULATOR_PARTITION_COUNT=5
+      - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
+    ports:
+        - '8081:8081'
+
+  webapp:
+    build: .
+    restart: on-failure:5 
+    ports:
+      - 5001:80
+    depends_on:
+      - cosmosdb
+
+
+
+  

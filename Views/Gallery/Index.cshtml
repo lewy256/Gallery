@@ -1,0 +1,24 @@
+﻿@model Gallery.ViewModels.GalleryViewModel
+
+<div id="result">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model.Images) {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="@Url.Action("GetImage","File", new{id=item.Id})" height="300" class="card-img-top" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <a class="btn btn-danger" asp-controller="Gallery" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Date: @item.Date</small>
+                        @foreach (var tag in item.Tags) {
+                            <span class="badge bg-info text-dark text-right float-end ms-1">@tag.Name</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
